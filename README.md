@@ -36,7 +36,8 @@ SELECT customer_id, COUNT(DISTINCT(order_date)) FROM sales
 
 -- 3. What was the first item from the menu purchased by each customer?
 ```sql
-SELECT * FROM sales s
+SELECT DISTINCT(customer_id), product_name FROM sales s
+	JOIN menu m ON m.product_id = s.product_id
 	WHERE s.order_date = ANY (SELECT MIN(order_date) FROM sales GROUP BY customer_id)
 ```
 
