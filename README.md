@@ -49,3 +49,19 @@ SELECT  COUNT(product_name) AS count, product_name FROM sales s
 	GROUP BY product_name ORDER BY count DESC LIMIT 1
 ```
 
+-- 5. 
+
+```sql
+WITH r AS 
+	(SELECT s.customer_id,
+		m.product_name,
+		COUNT(s.product_id) as count,
+        DENSE_RANK() OVER (PARTITION BY s.customer_id ORDER BY COUNT(s.product_id) DESC) AS r
+	FROM menu m 
+	JOIN sales s 
+	ON s.product_id = m.product_id
+	GROUP BY s.customer_id, s.product_id, m.product_name) 
+SELECT customer_id,Product_name,Count
+FROM r
+WHERE r = 1
+```
