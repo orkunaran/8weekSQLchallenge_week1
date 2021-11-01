@@ -65,3 +65,41 @@ SELECT customer_id,Product_name,Count
 FROM r
 WHERE r = 1
 ```
+
+-- 6.
+
+```sql
+ WITH ranks AS
+(
+SELECT s.customer_id,
+       m.product_name,
+	DENSE_RANK() OVER (PARTITION BY s.customer_id ORDER BY s.order_date) AS ranks
+FROM sales s
+JOIN menu m ON s.product_id = m.product_id
+JOIN members AS mem
+ON mem.customer_id = s.customer_id
+WHERE s.order_date >= mem.join_date)
+SELECT * FROM ranks
+WHERE ranks = 1
+```
+
+
+-- 7. 
+````sql
+WITH ranks AS
+(
+SELECT s.customer_id,
+		s.order_date,
+       m.product_name,
+	DENSE_RANK() OVER (PARTITION BY s.customer_id ORDER BY s.order_date) AS ranks, mem.join_date
+FROM sales s
+JOIN menu m ON s.product_id = m.product_id
+JOIN members AS mem
+ON mem.customer_id = s.customer_id
+WHERE s.order_date < mem.join_date)
+SELECT * FROM ranks
+WHERE ranks = 1
+````
+
+8 -- What is the total items and amount spent for each member before they became a member?
+
