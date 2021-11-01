@@ -106,11 +106,27 @@ WHERE ranks = 1
 ````sql
 
 SELECT s.customer_id, 
-		count(s.product_id) AS total_items, 
+	count(s.product_id) AS total_items, 
         SUM(price) AS money_spent
-        FROM sales AS s
-	JOIN menu AS m ON m.product_id = s.product_id
-	JOIN members AS mem ON s.customer_id = mem.customer_id
-    WHERE s.order_date < mem.join_date
+FROM sales AS s
+JOIN menu AS m ON m.product_id = s.product_id
+JOIN members AS mem ON s.customer_id = mem.customer_id
+WHERE s.order_date < mem.join_date
+GROUP BY s.customer_id
+````
+9 -- 
+````sql
+WITH points AS 
+(
+SELECT *,
+    CASE 
+    WHEN m.product_name = 'sushi' THEN price * 20
+    WHEN m.product_name != 'sushi' THEN price * 10
+    END AS points
+FROM menu m
+    )
+SELECT customer_id, SUM(points) AS points
+FROM sales s
+JOIN points p ON p.product_id = s.product_id
 GROUP BY s.customer_id
 ````
