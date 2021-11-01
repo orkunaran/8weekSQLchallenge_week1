@@ -103,3 +103,14 @@ WHERE ranks = 1
 
 8 -- What is the total items and amount spent for each member before they became a member?
 
+````sql
+
+SELECT s.customer_id, 
+		count(s.product_id) AS total_items, 
+        SUM(price) AS money_spent
+        FROM sales AS s
+	JOIN menu AS m ON m.product_id = s.product_id
+	JOIN members AS mem ON s.customer_id = mem.customer_id
+    WHERE s.order_date < mem.join_date
+GROUP BY s.customer_id
+````
