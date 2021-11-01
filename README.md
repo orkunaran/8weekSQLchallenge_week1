@@ -1,10 +1,10 @@
-# DANNY MA 8 WEEKS SQL Challange - Week 1
+# 8 WEEKS SQL Challange - Week 1
 
  <a href="https://github.com/orkunaran/danny_ma_8weeksSQL/issues">
-  <img alt="GitHub issues" src="https://img.shields.io/github/issues/orkunaran/danny_ma_8weeksSQL">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/orkunaran/danny_ma_8weeksSQL_week1">
  </a>
  
- <img src = 'https://badges.pufler.dev/visits/orkunaran/danny_ma_8weeksSQL'>
+ <img src = 'https://badges.pufler.dev/visits/orkunaran/danny_ma_8weeksSQL_week1'>
 <p>
 
 <img src = 'https://8weeksqlchallenge.com/images/case-study-designs/1.png' >
