@@ -123,7 +123,7 @@ Solution: Same as question 6, just changes order date lower than membershipdate.
 WITH ranks AS
 (
 SELECT s.customer_id,
-		s.order_date,
+	s.order_date,
        m.product_name,
 	DENSE_RANK() OVER (PARTITION BY s.customer_id ORDER BY s.order_date) AS ranks, mem.join_date
 FROM sales s
@@ -222,5 +222,48 @@ SELECT customer_id,
 FROM points
 WHERE EXTRACT(MONTH FROM order_date) = 1) as t
 GROUP BY customer_id
+````
+						       
+						       
+BONUS QUESTIONS
 
+Recreate the following table.
+						       
+````sql
+SELECT s.customer_id,
+		s.order_date,
+        m.product_name,
+        m.price,
+        CASE 
+        WHEN s.order_date >= mem.join_date THEN 'Y'
+        ELSE 'N' 
+        END AS member
+FROM sales s
+LEFT JOIN menu m ON m.product_id = s.product_id
+LEFT JOIN members mem ON mem.customer_id = s.customer_id
+ORDER BY customer_id, order_date, price DESC
+````
+	
+Rank Members - fill non-members with null
+````sql
+WITH membership AS
+(
+SELECT s.customer_id,
+		s.order_date,
+        m.product_name,
+        m.price,
+        CASE 
+        WHEN s.order_date >= mem.join_date THEN 'Y'
+        ELSE 'N' 
+        END AS member
+FROM sales s
+LEFT JOIN menu m ON m.product_id = s.product_id
+LEFT JOIN members mem ON mem.customer_id = s.customer_id
+ORDER BY customer_id, order_date, price DESC)
+SELECT *, 
+CASE WHEN member = 'N' THEN 'null'
+ELSE 
+RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date)
+END AS ranking
+FROM membership
 ````
