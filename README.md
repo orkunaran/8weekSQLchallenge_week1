@@ -211,15 +211,15 @@ SELECT s.customer_id,
 	JOIN menu m ON s.product_id = m.product_id
 	JOIN members AS mem
 	ON mem.customer_id = s.customer_id
-    WHERE s.order_date > mem.join_date)
+    )
 SELECT customer_id,
-	CASE 
-	WHEN first_week <= 7 THEN price * 20
-        WHEN first_week > 7 AND product_name = 'sushi' THEN price * 20
-	WHEN first_week > 7 AND product_name != 'sushi' THEN price * 10
+		CASE 
+		WHEN first_week BETWEEN 0 AND 7 THEN price * 20
+        WHEN (first_week > 7 OR first_week < 0) AND product_name = 'sushi' THEN price * 20
+		WHEN (first_week > 7 OR first_week < 0) AND product_name != 'sushi' THEN price * 10
         END AS total_points,
         order_date
-FROM points 
+FROM points
 WHERE EXTRACT(MONTH FROM order_date) = 1) as t
 GROUP BY customer_id
 
