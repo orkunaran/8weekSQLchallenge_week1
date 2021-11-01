@@ -7,8 +7,7 @@
  <img src = 'https://badges.pufler.dev/visits/orkunaran/danny_ma_8weeksSQL'>
 <p>
 
- <img src = 'https://8weeksqlchallenge.com/images/case-study-designs/1.png' >
-
+<img src = 'https://8weeksqlchallenge.com/images/case-study-designs/1.png' >
 <p>
 
 
@@ -25,7 +24,7 @@ We have 3 tables from a restaurant database: sales, menu and members. Each table
 Danny’s Diner is in need of your assistance to help the restaurant stay afloat - the restaurant has captured some very basic data from their few months of operation but have no idea how to use their data to help them run the business.
 
 	
-< img src = 'https://miro.medium.com/max/595/1*fEmZXjnIof5BHL_sLGDVUg.png' >
+<img src = 'https://miro.medium.com/max/595/1*fEmZXjnIof5BHL_sLGDVUg.png' >
 <p>
 
 	
